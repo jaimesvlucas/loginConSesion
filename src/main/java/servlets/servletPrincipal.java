@@ -35,13 +35,18 @@ public class servletPrincipal extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             String mensaje ="";
+            boolean logeado =false;
             Cookie cookies [] = request.getCookies();
             if(cookies!=null){
                 for(int i =0; i<cookies.length;i++){
                     if(cookies[i].getName().equals("usuario_logeado")){
                         mensaje = cookies[i].getValue();
+                        logeado = true;
                     }
                 }
+            }
+            if(!logeado){
+                response.sendRedirect("login.html");
             }
             out.println("<!DOCTYPE html>");
             out.println("<html>");

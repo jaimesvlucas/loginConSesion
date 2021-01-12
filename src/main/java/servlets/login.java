@@ -36,10 +36,15 @@ public class login extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String usuario = request.getParameter("usuario");
             String pass = request.getParameter("pass");
+            String mensaje = "";
             if(usuario.equalsIgnoreCase("admin") && pass.equalsIgnoreCase("1234")){
                 Cookie c = new Cookie("usuario_logeado","admin");
                 c.setMaxAge(60);
                 response.addCookie(c);
+                mensaje = "Usuario logeado";
+                response.sendRedirect("servletPrincipal");
+            }else{
+                mensaje="Usuario incorrecto";
             }
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -48,7 +53,7 @@ public class login extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
-            out.println("<h3>Usuario logeado</h3>");
+            out.println("<h3>"+mensaje+"</h3>");
             out.println("<a href=\"servletPrincipal\" >ServletPrincipal</a>");
             out.println("</body>");
             out.println("</html>");
